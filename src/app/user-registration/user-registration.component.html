@@ -1,0 +1,119 @@
+<mat-toolbar>User Registration</mat-toolbar>
+
+
+
+<!-- <div class="form-container"> -->
+    <!-- <div class="page-layout blank p-24 formDiv" fxLayoutAlign="center start"> -->
+  
+      <form  [formGroup]="userForm">
+        <div class="mb-24" fxLayout="row" fxLayoutAlign="center center">
+          <mat-toolbar color="primary">
+            <span class="toolbar-heading">
+              <h1>User Registration Form</h1>
+            </span>
+          </mat-toolbar>
+        </div>
+  
+        <div class="mb-24" fxLayout="row" fxLayoutAlign="center center">
+          <mat-form-field fxFlex appearance="outline">
+            <mat-label>First Name</mat-label>
+            <mat-icon matPrefix class="mr-12 s-20 secondary-text">account_circle</mat-icon>
+            <input name="name" formControlName="firstName" placeholder="First Name" matInput required>
+            <mat-error>"Enter Valid First Name"</mat-error>
+          </mat-form-field>
+        </div>
+  
+        <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+          <mat-form-field fxFlex appearance="outline">
+            <mat-label>Last Name</mat-label>
+  
+            <mat-icon matPrefix class="mr-12 s-20 secondary-text">account_circle</mat-icon>
+            <input name="lastName" formControlName="lastName" placeholder="Last Name" matInput required>
+            <mat-error>"Enter Valid Last Name"</mat-error>
+  
+          </mat-form-field>
+        </div>
+  
+        <!-- 
+        <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+          <mat-form-field class="mr-24" fxFlex appearance="outline">
+            <mat-label>Date Of Birth</mat-label>
+            <mat-icon matPrefix class="mr-12 s-20 secondary-text">cake</mat-icon>
+            <input matInput [matDatepicker]="dp3" [min]="minDate" [max]="maxDate" placeholder="DOB DD/MM/YYYY" readonly formControlName="birthday"
+              required (click)="dp3.open()">
+            <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+            <mat-datepicker #dp3></mat-datepicker>
+            <mat-error>"Enter Valid Birthday"</mat-error>
+          </mat-form-field>
+        </div> -->
+  
+        <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+          <mat-form-field floatPlaceholder="always" class="mat-form-field--no-underline" style="width:70%;">
+            <!-- the matInput with display:none makes the magic. It's ugly, I've warned you -->
+  
+            <input matInput style="display: none" formControlName="gender" />
+            <mat-radio-group aria-label="Gender" matInput formControlName="gender" required>
+              <mat-radio-button value="male">Male &nbsp; &nbsp;</mat-radio-button>
+              <mat-radio-button value="female">Female</mat-radio-button>
+            </mat-radio-group>
+            <mat-error>Please choose: Gender</mat-error>
+          </mat-form-field>
+        </div>
+  
+  
+  
+        <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+          <mat-form-field>
+            <mat-label>Semester</mat-label>
+            <mat-select formControlName="semester" required style="width: 200px;">
+              <mat-option *ngFor="let semester of semesters" [value]="semester">
+                {{ semester }}
+              </mat-option>
+            </mat-select>
+            <mat-error>Please choose: Semester</mat-error>
+  
+          </mat-form-field>
+        </div>
+  
+  
+        <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+          <mat-form-field>
+            <mat-label>Branch</mat-label>
+            <mat-select formControlName="branch" required style="width: 200px;">
+              <mat-option *ngFor="let branch of branches" [value]="branch.id">
+                {{ branch.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error>Please choose: branch</mat-error>
+  
+          </mat-form-field>
+        </div>
+  
+  
+        <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+          <mat-form-field fxFlex appearance="outline">
+            <mat-label>Mobile Number</mat-label>
+            <mat-icon matPrefix class="mr-12 s-20 secondary-text">phone</mat-icon>
+            <input formControlName="phone" matInput placeholder="Phone number" required>
+            <mat-error>"Enter Valid 10 Digit Mobile Number"</mat-error>
+  
+          </mat-form-field>
+        </div>
+        <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+          <mat-form-field fxFlex appearance="outline">
+            <mat-label>Email</mat-label>
+            <mat-icon matPrefix class="mr-12 s-20 secondary-text">email</mat-icon>
+            <input name="email" formControlName="email" matInput type="email" placeholder="Email" required>
+            <mat-error>"Enter Valid Email Address"</mat-error>
+          </mat-form-field>
+        </div>
+  
+  
+  
+  
+  
+        <button class="submit-btn" color="primary" mat-raised-button type="submit" (click)="submitForm()"
+          [disabled]="!userForm.valid">Submit</button>
+      </form>
+    <!-- </div> -->
+  <!-- </div> -->

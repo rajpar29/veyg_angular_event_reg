@@ -1,0 +1,16 @@
+<mat-toolbar>Cart</mat-toolbar>
+
+
+<div *ngFor="let user of sortedParticipantList">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>{{user.id}}</mat-card-title>
+            <mat-card-subtitle *ngFor="let event of user.events">{{event.name}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            Participant Total = {{user.participantTotal}}
+        </mat-card-content>
+
+    </mat-card>
+</div>
+<h3>Total = {{overallTotal}}</h3>

@@ -1,0 +1,6 @@
+<mat-toolbar>Veyg 2020</mat-toolbar>
+
+<div *ngFor="let category of categoryList">
+
+    <button mat-raised-button color="primary" (click)="navigate(category)">{{category.name}}</button>
+</div>

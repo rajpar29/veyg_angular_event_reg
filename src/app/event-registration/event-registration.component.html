@@ -1,0 +1,60 @@
+<mat-toolbar>
+    <span>Event Registration</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button aria-label="Example icon-button with a heart icon" (click)="toCart()">
+        <mat-icon>shopping_cart</mat-icon>
+    </button>
+
+</mat-toolbar>
+
+<form [formGroup]="eventForm">
+
+    <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+        <mat-form-field>
+            <mat-label>Branch</mat-label>
+            <mat-select formControlName="branch" required style="width: 200px;" (selectionChange)="branchChanged()">
+                <mat-option *ngFor="let branch of branches" [value]="branch">
+                    {{ branch.name }}
+                </mat-option>
+            </mat-select>
+            <mat-error>Please choose: branch</mat-error>
+
+        </mat-form-field>
+    </div>
+
+    <div class="mb-24" fxLayout="row" fxLayoutAlign="start start" *ngIf="branchSelected">
+        <mat-form-field>
+            <mat-label>Event</mat-label>
+            <mat-select formControlName="event" required style="width: 200px;" (selectionChange)="eventChanged()">
+                <mat-option *ngFor="let event of branchEvents" [value]="event">
+                    {{ event.name }}
+                </mat-option>
+            </mat-select>
+            <mat-error>Please choose: Event</mat-error>
+
+        </mat-form-field>
+    </div>
+
+    <!-- TEAM BUILDING -->
+    <div>
+        <div *ngFor="let user of teamList">
+            <mat-card>{{user.firstName}} {{user.lastName}}</mat-card>
+        </div>
+
+
+        <div class="mb-24" fxLayout="row" fxLayoutAlign="center center">
+            <mat-form-field fxFlex appearance="outline">
+                <mat-label>Unique Code</mat-label>
+                <mat-icon matPrefix class="mr-12 s-20 secondary-text">account_circle</mat-icon>
+                <input name="name" formControlName="code" placeholder="Unique Code" matInput required>
+            </mat-form-field>
+            <button class="submit-btn" color="primary" mat-raised-button type="button" (click)="fetchUser()"
+                [disabled]="!eventForm.valid">Add User</button>
+
+        </div>
+    </div>
+
+
+    <button class="submit-btn" color="primary" mat-raised-button type="submit" (click)="addToCart()"
+        [disabled]="!validateForm()">Add To Cart</button>
+</form>
