@@ -47,7 +47,6 @@ export const allEvents = {
             "name": "VidiTech",
             "teamSize": 5
         }
-
     ],
     "civ": [
         {
@@ -65,28 +64,44 @@ export const allEvents = {
             "name": "Is Paar se us Paar",
             "teamSize": 4
         }
-
     ],
-    "robotics": [
-        {
-            "id": 18,
-            "name": "ROBO 2.0",
-            "teamSize": 3
-        }
-    ],
+    
     "nt": [
         {
-            "id": 15,
+            "id": 12,
             "name": "Master - Chef",
             "teamSize": 3
         },
         {
-            "id": 16,
+            "id": 13,
             "name": "Master - Mind",
             "teamSize": 2
         }
-
-    ]
+    ],
+    "makeIndia": [
+        {
+            "id": 14,
+            "name": "Do it yourself",
+            "teamSize": 4
+        },
+        {
+            "id": 15,
+            "name": "The last few miles",
+            "teamSize": 2
+        },
+        {
+            "id": 16,
+            "name": "Ideas that change the world",
+            "teamSize": 4
+        }
+    ],
+    "robotics": [
+        {
+            "id": 17,
+            "name": "ROBO 2.0",
+            "teamSize": 3
+        }
+    ],
 }
 
 
