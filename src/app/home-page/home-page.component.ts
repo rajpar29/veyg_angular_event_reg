@@ -13,7 +13,7 @@ export class HomePageComponent implements OnInit {
   ngOnInit() {
   }
 
-  categoryList: any = [{ "name": "User Registration", "id": 0 }, { "name": "Register For Event", "id": 1 }];
+  categoryList: any = [{ "name": "User Registration", "id": 0 }, { "name": "Event Registration", "id": 1 }];
 
 
   navigate(category) {

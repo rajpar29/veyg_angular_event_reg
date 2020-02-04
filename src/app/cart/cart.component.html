@@ -1,11 +1,13 @@
 <mat-toolbar>Cart</mat-toolbar>
 
-
+<div *ngIf="sortedParticipantList.length == 0" style="padding-left: 40px;">
+    No events in the cart yet, add atleast one event.
+</div>
 <div *ngFor="let user of sortedParticipantList">
-    <mat-card>
+    <mat-card style="margin: 20px;">
         <mat-card-header>
             <mat-card-title>{{user.id}}</mat-card-title>
-            <mat-card-subtitle *ngFor="let event of user.events">{{event.name}}</mat-card-subtitle>
+            <mat-card-subtitle *ngFor="let ev of user.events">{{ev.event.name}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
             Participant Total = {{user.participantTotal}}
@@ -13,4 +15,6 @@
 
     </mat-card>
 </div>
-<h3>Total = {{overallTotal}}</h3>
+<h3 style="margin-left: 40px;" *ngIf="!sortedParticipantList.length <= 0">Total = {{overallTotal}} Rs</h3>
+
+<button mat-raised-button color="primary" (click)="register()" style="margin-left: 40px;" [disabled]="!sortedParticipantList.length > 0">Register</button>

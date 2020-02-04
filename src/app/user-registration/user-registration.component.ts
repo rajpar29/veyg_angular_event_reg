@@ -14,7 +14,15 @@ export class UserRegistrationComponent implements OnInit {
   userForm: FormGroup;
 
   semesters = [1, 2, 3, 4, 5, 6, 7, 8];
-  branches = [{ "name": "Computer and Information Technology", "id": "ce" }, { "name": "Civil", "id": "civ" }, { "name": "Mechanical and Automobile", "id": "mech" }, { "name": "Electrical and Electronics", "id": "ec" }];
+  branches = [
+    { "name": "Computer", "id": "ce" },
+    { "name": "Information Technology", "id": "it" },
+    { "name": "Civil", "id": "civ" },
+    { "name": "Mechanical", "id": "mech" },
+    { "name": "Automobile", "id": "auto" },
+    { "name": "Electrical", "id": "el" },
+    { "name": "Electronics", "id": "ec" },
+    { "name": "Others", "id": "ot" }];
 
 
   constructor(
@@ -45,10 +53,10 @@ export class UserRegistrationComponent implements OnInit {
   }
 
   submitForm() {
-   this._userService.registerUser(this.userForm.value).then((res)=>{
-    this.userForm.reset();
-   });
-  
+    this._userService.registerUser(this.userForm.value).then((res) => {
+      this.userForm.reset();
+    });
+
   }
 
 }

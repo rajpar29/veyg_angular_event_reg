@@ -25,6 +25,12 @@ export class CartComponent implements OnInit {
     this.sortparticipants();
 
   }
+
+
+  register(){
+    
+  }
+
   sortparticipants() {
 
     this.cartItems.forEach(item => {
@@ -50,24 +56,53 @@ export class CartComponent implements OnInit {
 
   }
   calculateParticipantPrice() {
-    
+
     this.sortedParticipantList.forEach(participant => {
       let participantTotal = 0;
-      console.log(participant);
-      console.log(participant.events.length);
-      
-      if (participant.events.length === 1) {
-        participantTotal = 70;
+
+      let tempFilter = participant.events.filter(ev => {
+        console.log(ev);
+        return ev.event.id === 19;
+      });
+      console.log(tempFilter);
+      let eventsWithoutRobo = participant.events.filter(ev => {
+        console.log(ev);
+        return !(ev.event.id === 19);
+      });
+
+
+
+      if (tempFilter.length > 0) {
+        console.log("Robotics event");
+        if (eventsWithoutRobo.length === 1) {
+          participantTotal = 70;
+        }
+        else if (eventsWithoutRobo.length === 2) {
+          participantTotal = 120;
+        }
+        else if (eventsWithoutRobo.length >= 3) {
+          participantTotal = eventsWithoutRobo.length * 50;
+        }
+        participantTotal = participantTotal + 240;
       }
-      else if (participant.events.length === 2) {
-        participantTotal = 120;
+      else {
+        console.log("No robotic");
+
+        if (participant.events.length === 1) {
+          participantTotal = 70;
+        }
+        else if (participant.events.length === 2) {
+          participantTotal = 120;
+        }
+        else if (participant.events.length >= 3) {
+          participantTotal = participant.events.length * 50;
+        }
       }
-      else if (participant.events.length >= 3) {
-        participantTotal = participant.events.length * 50;
-      }
+
+
       this.overallTotal = this.overallTotal + participantTotal;
       participant["participantTotal"] = participantTotal;
-      console.log("last",participant);
+      console.log("last", participant);
 
     });
   }

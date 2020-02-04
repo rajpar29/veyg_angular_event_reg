@@ -18,8 +18,32 @@ export class UserInfoComponent implements OnInit {
 
   ngOnInit() {
     this.userRegistered = this._dataService.userRegistered;
-    if(!this.userRegistered){
+    if (!this.userRegistered) {
       this._router.navigate([""]);
+    }
+  }
+
+  copyText() {
+    let selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = this.userRegistered.code;
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
+  }
+
+  navigate(destination) {
+    if (destination == 'user') {
+      this._router.navigate(["user-registration"]);
+    }
+    if (destination == 'event') {
+      this._router.navigate(["event-registration"]);
+
     }
   }
 

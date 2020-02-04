@@ -20,7 +20,14 @@ export class EventRegistrationComponent implements OnInit {
 
 
 
-  branches = [{ "name": "Civil", "id": "civ" }, { "name": "Computer and Information Technology", "id": "ce" }, { "name": "Mechanical and Automobile", "id": "mech" }, { "name": "Electrical and Electronics", "id": "ec" }];
+  branches = [
+    { "name": "Civil", "id": "civ" },
+    { "name": "Computer and Information Technology", "id": "ce" },
+    { "name": "Mechanical and Automobile", "id": "mech" },
+    { "name": "Electrical and Electronics", "id": "ec" },
+    { "name": "Robotics", "id": "robotics" },
+    { "name": "Non technical", "id": "nt" }
+  ];
   branchSelected: any;
   branchEvents: any[] = [];
 
@@ -57,7 +64,7 @@ export class EventRegistrationComponent implements OnInit {
       return;
     }
     this._spinner.show();
-    let code = this.eventForm.get("code").value;
+    let code = this.eventForm.get("code").value.trim();
     console.log(code);
     this._userSevice.fetchUser(code).then(res => {
       if (!res.exists) {
@@ -91,10 +98,10 @@ export class EventRegistrationComponent implements OnInit {
   checkIfAlreadyExists() {
     let code = this.eventForm.get("code").value;
     let tempArr = this.teamList.filter(member => member.code === code);
-    
-    
+
+
     console.log(tempArr);
-    
+
     if (tempArr.length > 0) {
       return -1;
     }

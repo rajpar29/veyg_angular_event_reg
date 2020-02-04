@@ -1,2 +1,18 @@
-<p>Your Code is{{userRegistered.code}}</p>
-<p>( First name _ uniqueId _ last five mobile number digits)</p>
+<mat-card class="userInfoCard">
+    <mat-card-header>
+        <mat-card-title> Your event registration code is <br />
+            <p style="font-size: 40px;">{{userRegistered.code}} <button mat-icon-button (click)="copyText()">
+                    <mat-icon style="font-size: 40px">file_copy</mat-icon>
+                </button></p>
+        </mat-card-title>
+        <br />
+        <mat-card-subtitle>( First name _ uniqueId _ last five mobile number digits)</mat-card-subtitle>
+    </mat-card-header>
+</mat-card>
+
+<div class="mb-24" fxLayout="row" fxLayoutAlign="space-between start">
+    <button mat-raised-button color="primary" (click)="navigate('event')"
+    class="nav-button">Register for events</button>
+    <button mat-raised-button color="primary" (click)="navigate('user')"
+    class="nav-button">Back to User Registration</button>
+</div>

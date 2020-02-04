@@ -1,6 +1,49 @@
 <mat-toolbar>Veyg 2020</mat-toolbar>
 
-<div *ngFor="let category of categoryList">
+<div class="instruction">
 
-    <button mat-raised-button color="primary" (click)="navigate(category)">{{category.name}}</button>
+    <h1 class="mat-display-1">How to register? (Kindly read this before registration)</h1>
+    <ol>
+        <li>
+            <h3 class="mat-h2">Register individual user in the User Registration section.</h3>
+        </li>
+        <li>
+            <h3 class="mat-h2">Copy the generated User code. (This code will be used for event registration)</h3>
+        </li>
+        <li>
+            <h3 class="mat-h2">Navigate to the Event Registration page</h3>
+        </li>
+        <li>
+            <h3 class="mat-h2">Choose the event you want to register</h3>
+        </li>
+        <li>
+            <h3 class="mat-h2">Add team members using the user code</h3>
+        </li>
+        <li>
+            <h3 class="mat-h2">Add event to cart</h3>
+        </li>
+        <li>
+            <h3 class="mat-h2">Add all the events you want to register in the cart</h3>
+        </li>
+        <li>
+            <h3 class="mat-h2">After adding the events, register by making the payment</h3>
+        </li>
+    </ol>
+    <h1 class="mat-display-1">**Please register in all the events that you wish to before payment to avail the combo offer**</h1>
+
 </div>
+
+<div class="mb-24" fxLayout="row" fxLayoutAlign="space-between start">
+    <button mat-raised-button color="primary" (click)="navigate(categoryList[0])"
+        class="big-button">{{categoryList[0].name}}</button>
+    <button mat-raised-button color="primary" (click)="navigate(categoryList[1])"
+        class="big-button">{{categoryList[1].name}}</button>
+</div>
+
+
+
+<!-- <div *ngFor="let category of categoryList">
+
+    <button mat-raised-button color="primary" (click)="navigate(category)"
+        class="big-button">{{category.name}}</button>
+</div> -->
