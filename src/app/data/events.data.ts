@@ -7,7 +7,7 @@ export const allEvents = {
         },
         {
             "id": 1,
-            "name": "Career Molding",
+            "name": "Career Moulding",
             "teamSize": 6
         },
         {
@@ -76,28 +76,33 @@ export const allEvents = {
             "id": 13,
             "name": "Master - Mind",
             "teamSize": 2
+        },
+        {
+            "id": 14,
+            "name": "Gully Cricket",
+            "teamSize": 6
         }
     ],
     "makeIndia": [
         {
-            "id": 14,
+            "id": 15,
             "name": "Do it yourself",
             "teamSize": 4
         },
         {
-            "id": 15,
+            "id": 16,
             "name": "The last few miles",
             "teamSize": 2
         },
         {
-            "id": 16,
+            "id": 17,
             "name": "Ideas that change the world",
             "teamSize": 4
         }
     ],
     "robotics": [
         {
-            "id": 17,
+            "id": 18,
             "name": "ROBO 2.0",
             "teamSize": 3
         }

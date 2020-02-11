@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar class="app-toolbar">
     <span>Event Registration</span>
     <span class="example-spacer"></span>
     <button mat-icon-button aria-label="Example icon-button with a heart icon" (click)="toCart()">
@@ -6,6 +6,28 @@
     </button>
 
 </mat-toolbar>
+
+<div class="instruction">
+
+    <h1 class="mat-display-1" style="margin-bottom: 10px;">Registration Fees</h1>
+    <ol>
+        <li>
+            <h3 class="mat-h2">Rs. 70 per Technical Event/Member.</h3>
+        </li>
+        <li>
+            <h3 class="mat-h2">Rs. 70 per Non-Technical Event/Member</h3>
+        </li>
+        <li>
+            <h3 class="mat-h2">Combo of 2 events: - Rs. 60 per Event/Member</h3>
+        </li>
+        <li>
+            <h3 class="mat-h2">Combo of 3 or more events: - Rs. 50 per Event/Member</h3>
+        </li>
+        <li>
+            <h3 class="mat-h2">Robo 2.0 - Rs. 240 per team or Individual Participation</h3>
+        </li>
+    </ol>
+</div>
 
 <form [formGroup]="eventForm" class="form">
 
@@ -44,37 +66,48 @@
         </mat-form-field>
     </div>
 
+    <div *ngIf="eventSelected">
+        <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+            <mat-label style="margin-left: 40px; margin-top: 40px; padding-top: 40px;">Team Size :
+                {{eventSelected.teamSize}}</mat-label>
+        </div>
+    </div>
+
     <!-- TEAM BUILDING -->
-        <div *ngIf="eventSelected && branchSelected" class="backgroud-section">
-            <mat-label style="padding-left: 40px;font-size: 32px;">Team Members:</mat-label>
-            <div>
-                <div *ngIf="teamList.length == 0" style="padding-left: 40px;">
-                    No members yet, add atleast one member by entering the user code.
-                </div>
-                <div *ngFor="let user of teamList; let i=index" style="padding-left: 40px; padding-top: 10px;">
-                    <mat-card style="width: 50%;">
-                        <div fxLayout="row" fxLayoutAlign="space-between center">
-                            {{user.firstName}} {{user.lastName}}
-                        </div>
-                    </mat-card>
-                </div>
+    <div *ngIf="eventSelected && branchSelected" class="backgroud-section">
+        <mat-label style="padding-left: 40px;font-size: 32px;">Team Members:</mat-label>
+        <div>
+            <div *ngIf="teamList.length == 0" style="padding-left: 40px;">
+                No members yet, add atleast one member by entering the user code.
+            </div>
+            <div *ngFor="let user of teamList; let i=index" style="padding-left: 40px; padding-top: 10px;">
+                <mat-card style="width: 50%;">
+                    <div fxLayout="row" fxLayoutAlign="space-between center">
+                        {{user.firstName}} {{user.lastName}}
+                    </div>
+                </mat-card>
+            </div>
 
 
-                <div class="mb-24" fxLayout="row" fxLayoutAlign="center center">
-                    <mat-form-field fxFlex appearance="outline" style="padding-right: 40px; padding-top: 10px;">
-                        <mat-label>User Code( First register user)</mat-label>
-                        <input name="name" formControlName="code" placeholder="Unique Code" matInput required>
-                    </mat-form-field>
-                    <button class="submit-btn" color="primary" mat-raised-button type="button" (click)="fetchUser()"
-                        [disabled]="!eventForm.valid">Add User</button>
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="center center">
+                <mat-form-field fxFlex appearance="outline" style="padding-right: 40px; padding-top: 10px;">
+                    <mat-label>User Code( First register user)</mat-label>
+                    <input name="name" formControlName="code" placeholder="Unique Code" matInput required>
+                </mat-form-field>
+                <button class="submit-btn" style="margin-left: 32px;" color="primary" mat-raised-button type="button" (click)="fetchUser()"
+                    [disabled]="!eventForm.valid">Add User</button>
 
-                </div>
             </div>
         </div>
+    </div>
 
-    <div style="padding-left: 40px;">
+    <div style="padding-left: 40px;" fxLayout="row" fxLayoutAlign="space-between start">
 
-        <button class="submit-btn" color="primary" mat-raised-button type="submit" (click)="addToCart()"
+        <button class="eventButton" color="primary" mat-raised-button type="submit" (click)="addToCart()"
             [disabled]="!validateForm()">Add To Cart</button>
+
+        <button class="eventButton" color="primary" mat-raised-button type="button" (click)="toCart()"
+            [disabled]="validateForm()">Go To Cart</button>
+
     </div>
 </form>

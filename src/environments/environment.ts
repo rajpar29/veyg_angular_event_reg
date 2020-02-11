@@ -12,7 +12,9 @@ export const environment = {
     storageBucket: "event-registraion.appspot.com",
     messagingSenderId: "958457668969",
     appId: "1:958457668969:web:913529b81f2223b44e89f8"
-}
+  },
+
+  aeskey: "mysecurekey"
 };
 
 /*

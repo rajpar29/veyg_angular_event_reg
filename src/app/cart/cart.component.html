@@ -1,6 +1,10 @@
-<mat-toolbar>Cart</mat-toolbar>
+<mat-toolbar>
+    <button mat-icon-button  (click)="toEvents()" style="margin-right: 10px;">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+    Cart</mat-toolbar>
 
-<div *ngIf="sortedParticipantList.length == 0" style="padding-left: 40px;">
+<div *ngIf="sortedParticipantList.length == 0" style="padding-left: 40px; margin-top: 40px;">
     No events in the cart yet, add atleast one event.
 </div>
 <div *ngFor="let user of sortedParticipantList">
@@ -9,12 +13,44 @@
             <mat-card-title>{{user.id}}</mat-card-title>
             <mat-card-subtitle *ngFor="let ev of user.events">{{ev.event.name}}</mat-card-subtitle>
         </mat-card-header>
-        <mat-card-content>
-            Participant Total = {{user.participantTotal}}
+        <mat-card-content style="margin-left: 20px; margin-top:20px">
+            Participant Total = {{user.participantTotal}} Rs
         </mat-card-content>
-
     </mat-card>
 </div>
-<h3 style="margin-left: 40px;" *ngIf="!sortedParticipantList.length <= 0">Total = {{overallTotal}} Rs</h3>
+<div *ngIf="!(sortedParticipantList.length <= 0)">
+    <h3 style="margin-left: 40px;">Total = {{overallTotal}} Rs</h3>
+</div>
 
-<button mat-raised-button color="primary" (click)="register()" style="margin-left: 40px;" [disabled]="!sortedParticipantList.length > 0">Register</button>
+
+
+<div class="mb-24" fxLayout="row" fxLayoutAlign="start start" *ngIf="!(sortedParticipantList.length == 0)"
+    class="backgroud-section">
+    <h3 class="mat-h2">Terms and Conditions.</h3>
+    <br />
+    <ol>
+        <li>
+            Any event having less than or equal to 8 participations (Teams or individual) Will be having only 1 prize.
+        </li>
+        <li>
+            Any event having more than 8 participations (Teams or individual) will be having 2 prizes.
+        </li>
+    </ol>
+    <mat-checkbox matInput [(ngModel)]="isTcAccepted" style="margin-left: 20px;">I accept the Terms &
+        Conditions</mat-checkbox>
+</div>
+
+<button mat-raised-button color="primary" (click)="register()" style="margin-left: 40px;"
+*ngIf="(sortedParticipantList.length > 0)"
+    [disabled]="!(sortedParticipantList.length > 0 && isTcAccepted)">Register</button>
+
+<button mat-raised-button color="warn" (click)="clearCart()" style="margin-left: 40px;"
+    *ngIf="(sortedParticipantList.length > 0)">Clear</button>
+
+<form name="myform" method="post" action="https://veyg-paytm1.herokuapp.com/payment" *ngIf="firstUser">
+    <input type="hidden" name="cust_id" [value]="firstUser.code">
+    <input type="hidden" name="txn_amt" [value]="overallTotal">
+    <input type="hidden" name="mobile" [value]="firstUser.phone">
+    <input type="hidden" name="email" [value]="firstUser.email">
+    <input type="hidden" name="order_id" [value]="orderId">
+</form>

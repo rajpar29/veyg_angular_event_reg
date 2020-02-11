@@ -75,7 +75,7 @@
   <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
     <mat-form-field>
       <mat-label>Branch</mat-label>
-      <mat-select formControlName="branch" required style="width: 200px;">
+      <mat-select formControlName="branch" required style="width: 200px;" (selectionChange)="branchChanged()">
         <mat-option *ngFor="let branch of branches" [value]="branch.id">
           {{ branch.name }}
         </mat-option>
@@ -85,6 +85,26 @@
     </mat-form-field>
   </div>
 
+  <div class="mb-24" fxLayout="row" fxLayoutAlign="start start" *ngIf="isOtherBranch">
+    <mat-form-field fxFlex appearance="outline">
+      <mat-label>branch Name</mat-label>
+
+      <mat-icon matSuffix class="mr-12 s-20 secondary-text">domain</mat-icon>
+      <input name="otherBranchName" formControlName="otherBranchName" placeholder="branch Name" matInput required>
+      <mat-error>"Enter Valid branch Name"</mat-error>
+    </mat-form-field>
+  </div>
+
+
+  <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+    <mat-form-field fxFlex appearance="outline">
+      <mat-label>College Name</mat-label>
+
+      <mat-icon matSuffix class="mr-12 s-20 secondary-text">domain</mat-icon>
+      <input name="clgName" formControlName="clgName" placeholder="College Name" matInput required>
+      <mat-error>"Enter Valid College Name"</mat-error>
+    </mat-form-field>
+  </div>
 
   <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
     <mat-form-field fxFlex appearance="outline">

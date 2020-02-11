@@ -41,6 +41,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { UserInfoComponent } from './user-registration/user-info/user-info.component';
 import { CartComponent } from './cart/cart.component';
+import { OrderStatusComponent } from './order-status/order-status.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -51,12 +53,15 @@ import { CartComponent } from './cart/cart.component';
     EventRegistrationComponent,
     HomePageComponent,
     UserInfoComponent,
-    CartComponent
+    CartComponent,
+    OrderStatusComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+
+    HttpClientModule,
 
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features

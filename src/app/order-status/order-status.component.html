@@ -1,0 +1,35 @@
+<section class="c-container">
+
+  <div class="o-circle c-container__circle o-circle__sign--success" *ngIf="isPaymentSuccessFull">
+    <div class="o-circle__sign"></div>
+  </div>
+
+  <div class="o-circle c-container__circle o-circle__sign--failure" *ngIf="!isPaymentSuccessFull">
+    <div class="o-circle__sign"></div>
+
+
+  </div>
+  <div *ngIf="isPaymentSuccessFull">
+
+    <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+
+      <h1 class="mat-display-1" style="margin-bottom: 10px;">Registration successful</h1>
+      Transaction Id: <h1 class="mat-display-1" style="margin-bottom: 10px;">{{txn_id}}</h1>
+      Order Id: <h1 class="mat-display-1" style="margin-bottom: 10px;">{{order_id}}</h1>
+      <button mat-raised-button color="primary" (click)="copy()" style="margin-left: 40px;">Copy Details</button>
+
+
+
+      <button mat-raised-button color="primary" (click)="generatePdf()" style="margin-left: 40px;"
+        *ngIf="isPaymentSuccessFull">Generate PDF</button>
+
+
+    </div>
+
+  </div>
+
+
+  <h1 class="mat-display-1" style="margin-bottom: 10px;" *ngIf="!isPaymentSuccessFull">Registration Failed, Payment
+    Failed</h1>
+
+</section>

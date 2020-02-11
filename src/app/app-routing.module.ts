@@ -5,6 +5,7 @@ import { UserRegistrationComponent } from './user-registration/user-registration
 import { EventRegistrationComponent } from './event-registration/event-registration.component';
 import { UserInfoComponent } from './user-registration/user-info/user-info.component';
 import { CartComponent } from './cart/cart.component';
+import { OrderStatusComponent } from './order-status/order-status.component';
 
 
 const routes: Routes = [
@@ -28,6 +29,10 @@ const routes: Routes = [
   {
     path: 'cart',
     component: CartComponent
+  },
+  {
+    path: 'order-status/:response',
+    component: OrderStatusComponent
   }
 ];
 

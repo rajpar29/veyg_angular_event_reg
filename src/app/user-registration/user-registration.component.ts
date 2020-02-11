@@ -12,6 +12,7 @@ import { UserService } from '../services/user.service';
 export class UserRegistrationComponent implements OnInit {
 
   userForm: FormGroup;
+  isOtherBranch: boolean;
 
   semesters = [1, 2, 3, 4, 5, 6, 7, 8];
   branches = [
@@ -21,7 +22,7 @@ export class UserRegistrationComponent implements OnInit {
     { "name": "Mechanical", "id": "mech" },
     { "name": "Automobile", "id": "auto" },
     { "name": "Electrical", "id": "el" },
-    { "name": "Electronics", "id": "ec" },
+    { "name": "Electronics and Communication", "id": "ec" },
     { "name": "Others", "id": "ot" }];
 
 
@@ -37,6 +38,7 @@ export class UserRegistrationComponent implements OnInit {
       gender: ["", [Validators.required]],
       semester: ["", [Validators.required]],
       branch: ["", [Validators.required]],
+      clgName: ["", [Validators.required]],
       phone: [
         "",
         [
@@ -46,10 +48,25 @@ export class UserRegistrationComponent implements OnInit {
           Validators.pattern("^[0-9]*$")
         ]
       ],
+      otherBranchName: ["",[Validators.required]]
     });
   }
 
   ngOnInit() {
+  }
+
+  branchChanged(){
+    console.log(this.userForm.get("branch").value);
+    
+    if(this.userForm.get("branch").value === 'ot'){
+      this.isOtherBranch = true;
+      this.userForm.get("otherBranchName").setValue("");
+    }
+    else{
+      this.isOtherBranch = false;
+      this.userForm.get("otherBranchName").setValue("not other");
+
+    }
   }
 
   submitForm() {

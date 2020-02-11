@@ -26,7 +26,8 @@ export class EventRegistrationComponent implements OnInit {
     { "name": "Mechanical and Automobile", "id": "mech" },
     { "name": "Electrical and Electronics", "id": "ec" },
     { "name": "Robotics", "id": "robotics" },
-    { "name": "Non technical", "id": "nt" }
+    { "name": "Non technical", "id": "nt" },
+    { "name": "Make in India", "id": "makeIndia" }
   ];
   branchSelected: any;
   branchEvents: any[] = [];
@@ -112,6 +113,7 @@ export class EventRegistrationComponent implements OnInit {
     this.branchSelected = this.eventForm.get("branch").value;
     console.log("here", this.eventForm.get("branch").value);
     this.branchEvents = this.events[this.branchSelected.id];
+    this.eventForm.get("event").setValue("");
     console.log(this.branchEvents);
     this.teamList = [];
 

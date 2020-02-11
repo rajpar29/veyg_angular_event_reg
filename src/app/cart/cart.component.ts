@@ -1,5 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataService } from '../services/data.service';
+import { OrderService } from '../services/order.service';
+import { FormBuilder, NgForm, FormGroup } from '@angular/forms';
+import { FirebaseStorage } from '@angular/fire';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { NgxSpinner } from 'ngx-spinner/lib/ngx-spinner.enum';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-cart',
@@ -8,8 +16,17 @@ import { DataService } from '../services/data.service';
 })
 export class CartComponent implements OnInit {
 
+
+  firstUser: any;
+  orderId: any;
+  tempFilter: any[] = [];
+
   constructor(
-    private _dataService: DataService
+    private _dataService: DataService,
+    private _orderService: OrderService,
+    private _fsDB: AngularFirestore,
+    private _spinner: NgxSpinnerService,
+    private _router : Router
   ) { }
 
   cartItems: any[];
@@ -17,20 +34,58 @@ export class CartComponent implements OnInit {
   sortedParticipantList = [];
   overallTotal = 0;
 
+  isTcAccepted = false;
+
+
 
   ngOnInit() {
     this.cartItems = this._dataService.cartList;
     console.log(this.cartItems);
-
     this.sortparticipants();
+    if (this.sortedParticipantList.length > 0) {
+
+      this._spinner.show();
+      console.log("first user", this.sortedParticipantList[0]);
+      this.getFirstUser();
+    }
+  }
+
+  async getFirstUser() {
+    await this._fsDB.collection("users").doc(this.sortedParticipantList[0]["id"]).get().toPromise().then(res => {
+      this.firstUser = res.data();
+      console.log("first user data", this.firstUser);
+      this._spinner.hide()
+    }).catch(err => {
+      alert("Some Error occured");
+      this._spinner.hide()
+    });
+  }
+
+  register() {
+    this.orderId = this.sortedParticipantList[0]["id"] + new Date().getTime();
+    this._spinner.show();
+
+    this._fsDB.collection("registrations").doc(this.orderId).set({ "registers": this.sortedParticipantList, "paid": false, "total": this.overallTotal }).then(res => {
+      document.forms['myform'].submit();
+      this._spinner.hide()
+      return false;
+    }).catch(err => {
+      alert("Some Error occured");
+    });
 
   }
 
-
-  register(){
-    
+  clearCart(){
+    this._dataService.cartList = [];
+    this.cartItems = [];
+    this.sortedParticipantMap = {};
+    this.sortedParticipantList = [];
+    this.overallTotal = 0;
   }
 
+  toEvents(){
+    this._router.navigate(["event-registration"]);
+  }
   sortparticipants() {
 
     this.cartItems.forEach(item => {
@@ -54,28 +109,30 @@ export class CartComponent implements OnInit {
 
     this.calculateParticipantPrice();
 
+
   }
   calculateParticipantPrice() {
 
     this.sortedParticipantList.forEach(participant => {
       let participantTotal = 0;
 
-      let tempFilter = participant.events.filter(ev => {
+      this.tempFilter = participant.events.filter(ev => {
         console.log(ev);
-        return ev.event.id === 19;
+        return ev.event.id === 18;
       });
-      console.log(tempFilter);
+      console.log(this.tempFilter);
       let eventsWithoutRobo = participant.events.filter(ev => {
         console.log(ev);
-        return !(ev.event.id === 19);
+        return !(ev.event.id === 18);
       });
 
 
 
-      if (tempFilter.length > 0) {
+      if (this.tempFilter.length > 0) {
         console.log("Robotics event");
         if (eventsWithoutRobo.length === 1) {
           participantTotal = 70;
+
         }
         else if (eventsWithoutRobo.length === 2) {
           participantTotal = 120;
@@ -83,7 +140,6 @@ export class CartComponent implements OnInit {
         else if (eventsWithoutRobo.length >= 3) {
           participantTotal = eventsWithoutRobo.length * 50;
         }
-        participantTotal = participantTotal + 240;
       }
       else {
         console.log("No robotic");
@@ -105,6 +161,10 @@ export class CartComponent implements OnInit {
       console.log("last", participant);
 
     });
+
+    if (this.tempFilter.length > 0) {
+      this.overallTotal = this.overallTotal + 240;
+    }
   }
 
 }

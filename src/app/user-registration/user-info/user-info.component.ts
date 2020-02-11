@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-user-info',
@@ -12,7 +13,8 @@ export class UserInfoComponent implements OnInit {
   userRegistered: any;
   constructor(
     private _dataService: DataService,
-    private _router: Router
+    private _router: Router,
+    private _snack: MatSnackBar
 
   ) { }
 
@@ -35,6 +37,7 @@ export class UserInfoComponent implements OnInit {
     selBox.select();
     document.execCommand('copy');
     document.body.removeChild(selBox);
+    this._snack.open('Code Copied', "Ok", { duration: 3000 });
   }
 
   navigate(destination) {
