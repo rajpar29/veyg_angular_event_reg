@@ -43,6 +43,7 @@ import { UserInfoComponent } from './user-registration/user-info/user-info.compo
 import { CartComponent } from './cart/cart.component';
 import { OrderStatusComponent } from './order-status/order-status.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CommingSoonComponent } from './comming-soon/comming-soon.component';
 
 
 
@@ -54,7 +55,8 @@ import { HttpClientModule } from '@angular/common/http';
     HomePageComponent,
     UserInfoComponent,
     CartComponent,
-    OrderStatusComponent
+    OrderStatusComponent,
+    CommingSoonComponent
   ],
   imports: [
     BrowserModule,

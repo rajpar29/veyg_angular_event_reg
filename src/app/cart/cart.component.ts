@@ -7,6 +7,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { NgxSpinner } from 'ngx-spinner/lib/ngx-spinner.enum';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
+import { CartService } from '../services/cart.service';
 
 
 @Component({
@@ -26,7 +27,8 @@ export class CartComponent implements OnInit {
     private _orderService: OrderService,
     private _fsDB: AngularFirestore,
     private _spinner: NgxSpinnerService,
-    private _router : Router
+    private _router: Router,
+    private _cartService: CartService
   ) { }
 
   cartItems: any[];
@@ -45,7 +47,7 @@ export class CartComponent implements OnInit {
     if (this.sortedParticipantList.length > 0) {
 
       this._spinner.show();
-      console.log("first user", this.sortedParticipantList[0]);
+      // console.log("first user", this.sortedParticipantList[0]);
       this.getFirstUser();
     }
   }
@@ -53,7 +55,7 @@ export class CartComponent implements OnInit {
   async getFirstUser() {
     await this._fsDB.collection("users").doc(this.sortedParticipantList[0]["id"]).get().toPromise().then(res => {
       this.firstUser = res.data();
-      console.log("first user data", this.firstUser);
+      // console.log("first user /data", this.firstUser);
       this._spinner.hide()
     }).catch(err => {
       alert("Some Error occured");
@@ -65,17 +67,19 @@ export class CartComponent implements OnInit {
     this.orderId = this.sortedParticipantList[0]["id"] + new Date().getTime();
     this._spinner.show();
 
-    this._fsDB.collection("registrations").doc(this.orderId).set({ "registers": this.sortedParticipantList, "paid": false, "total": this.overallTotal }).then(res => {
-      document.forms['myform'].submit();
-      this._spinner.hide()
-      return false;
-    }).catch(err => {
-      alert("Some Error occured");
-    });
 
+    this._cartService.registerTeam(this.cartItems, this.orderId).then(res => {
+      this._fsDB.collection("registrations").doc(this.orderId).set({ "registers": this.sortedParticipantList, "paid": false, "total": this.overallTotal }).then(res => {
+        document.forms['myform'].submit();
+        this._spinner.hide();
+        return false;
+      }).catch(err => {
+        alert("Some Error occured");
+      });
+    });
   }
 
-  clearCart(){
+  clearCart() {
     this._dataService.cartList = [];
     this.cartItems = [];
     this.sortedParticipantMap = {};
@@ -83,7 +87,7 @@ export class CartComponent implements OnInit {
     this.overallTotal = 0;
   }
 
-  toEvents(){
+  toEvents() {
     this._router.navigate(["event-registration"]);
   }
   sortparticipants() {
@@ -117,10 +121,10 @@ export class CartComponent implements OnInit {
       let participantTotal = 0;
 
       this.tempFilter = participant.events.filter(ev => {
-        console.log(ev);
+        // console.log(ev);
         return ev.event.id === 18;
       });
-      console.log(this.tempFilter);
+      // console.log(this.tempFilter);
       let eventsWithoutRobo = participant.events.filter(ev => {
         console.log(ev);
         return !(ev.event.id === 18);
@@ -158,7 +162,7 @@ export class CartComponent implements OnInit {
 
       this.overallTotal = this.overallTotal + participantTotal;
       participant["participantTotal"] = participantTotal;
-      console.log("last", participant);
+      // console.log("last", participant);
 
     });
 

@@ -74,7 +74,7 @@ export const allEvents = {
         },
         {
             "id": 13,
-            "name": "Master - Mind",
+            "name": "Survival of the fittest Brain",
             "teamSize": 2
         },
         {

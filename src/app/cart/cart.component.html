@@ -15,6 +15,13 @@
         </mat-card-header>
         <mat-card-content style="margin-left: 20px; margin-top:20px">
             Participant Total = {{user.participantTotal}} Rs
+            <br/>
+            <br/>
+            <div style="color: #BA55D3; font-style: italic;">
+                <button mat-stroked-button *ngIf="user.events.length === 1" (click)="toEvents()" class="offer-button">Add two more events for only 80 Rs more</button>
+                <button mat-stroked-button *ngIf="user.events.length === 2" (click)="toEvents()" class="offer-button" >Add one more events for only 30 Rs more</button>
+            </div>
+
         </mat-card-content>
     </mat-card>
 </div>

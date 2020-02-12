@@ -6,6 +6,7 @@ import { EventRegistrationComponent } from './event-registration/event-registrat
 import { UserInfoComponent } from './user-registration/user-info/user-info.component';
 import { CartComponent } from './cart/cart.component';
 import { OrderStatusComponent } from './order-status/order-status.component';
+import { CommingSoonComponent } from './comming-soon/comming-soon.component';
 
 
 const routes: Routes = [

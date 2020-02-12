@@ -45,7 +45,8 @@ export class OrderStatusComponent implements OnInit {
     }
     let res = back.split("splitter");
       if (res[1] == "TXN_SUCCESS") {
-        this._fsDB.collection("registrations").doc(res[0]).set({ "paid": true, "txn_id":res[2] ,"order_id": res[0]}, { merge: true })
+        this._fsDB.collection("registrations").doc(res[0]).set({ "paid": true, "txn_id":res[2] ,"order_id": res[0]}, { merge: true });
+        this._fsDB.collection("teams").doc(res[0]).set({ "paid": true, "txn_id":res[2] ,"order_id": res[0]}, { merge: true });
         this.isPaymentSuccessFull = true;
         this.txn_id = res[2];
         this.order_id = res[0]
@@ -57,7 +58,7 @@ export class OrderStatusComponent implements OnInit {
   }
 
   generatePdf(){
-    const documentDefinition = { content: "Transaction Id:" + this.txn_id + "\n" +  "Order Id : "  + this.order_id};
+    const documentDefinition = { content: "SAFFRONY INSTITUTE OF TECHNOLOGY " + "\n\n" + "Veyg 2020 " + "\n\n" +"Transaction Id:" + this.txn_id + "\n" +  "Order Id : "  + this.order_id};
     pdfMake.createPdf(documentDefinition).open();
    }
 
